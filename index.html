@@ -1,344 +1,633 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pak Eko Bot — Chatbot AI untuk Semua Website</title>
-  <meta name="description" content="Pak Eko Bot: Chatbot AI elegan (bahasa Indonesia) untuk meningkatkan interaksi dan konversi di website Anda." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg: #f7f9fc;
-      --dark-900: #021428; /* deep navy */
-      --dark-700: #013153;
-      --primary: #003366; /* elegant dark blue */
-      --primary-600:#005089;
-      --accent: #0a6cff;
-      --muted: #6b7b8c;
-      --card: #ffffff;
-      --glass: rgba(255,255,255,0.04);
-      --radius: 14px;
-      --shadow: 0 10px 30px rgba(2,20,40,0.08);
-      font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#ffffff);color:var(--dark-900);}
-    .container{max-width:1200px;margin:0 auto;padding:24px}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apparell T-Shirt | Solusi T-Shirt Modern & Dinamis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Variabel CSS */
+        :root {
+            --primary-color: #007bff; /* Biru Cerah Dominan */
+            --secondary-color: #0056b3; /* Biru Gelap untuk Hover/Aksen */
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --max-width: 1200px;
+            --font-main: 'Poppins', sans-serif;
+            --border-radius: 8px;
+        }
 
-    /* Header */
-    header{position:fixed;left:0;right:0;top:0;background:rgba(255,255,255,0.98);backdrop-filter:saturate(120%) blur(6px);box-shadow:0 6px 20px rgba(2,20,40,0.06);z-index:1000}
-    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px}
-    .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
-    .logo-mark{width:44px;height:44px;border-radius:9px;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;color:white;font-weight:800}
-    .brand .title{font-weight:800;color:var(--dark-900);letter-spacing:0.2px}
-    .links{display:flex;gap:16px;align-items:center}
-    .links a{color:var(--dark-900);text-decoration:none;font-weight:600}
-    .btn{padding:10px 16px;border-radius:999px;border:0;cursor:pointer;font-weight:700}
-    .btn-primary{background:linear-gradient(90deg,var(--primary),var(--accent));color:white;box-shadow:0 8px 30px rgba(0,80,144,0.12)}
-    .btn-ghost{background:transparent;border:2px solid rgba(1,49,83,0.08);color:var(--primary)}
+        /* Reset & Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}
-    .hamburger span{width:24px;height:3px;background:var(--primary);border-radius:3px}
+        body {
+            font-family: var(--font-main);
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: #ffffff;
+        }
 
-    /* Hero */
-    .hero{padding:120px 0 64px}
-    .hero-grid{display:grid;grid-template-columns:1fr 480px;gap:36px;align-items:center}
-    .eyebrow{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(10,108,255,0.07);color:var(--primary);font-weight:700;margin-bottom:12px}
-    h1{font-size:36px;margin:6px 0 12px;line-height:1.08}
-    p.lead{color:var(--muted);margin:0 0 18px}
-    .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
 
-    .card{background:var(--card);border-radius:12px;padding:14px;box-shadow:var(--shadow)}
-    .chat-preview{height:380px;border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
-    .chat-header{padding:12px;border-bottom:1px solid rgba(0,0,0,0.04);font-weight:700;background:linear-gradient(90deg,rgba(0,51,102,0.03),transparent)}
-    .chat-body{flex:1;padding:14px;overflow:auto;background:linear-gradient(180deg,#f8fbff,white)}
-    .msg{max-width:78%;padding:10px 12px;border-radius:12px;margin-bottom:10px}
-    .msg.bot{background:linear-gradient(90deg,#eef6ff,#f4faff)}
-    .msg.user{margin-left:auto;background:#eaf2ff}
-    .chat-foot{padding:12px;border-top:1px solid rgba(0,0,0,0.03);display:flex;gap:8px}
-    .input{flex:1;padding:10px 12px;border-radius:10px;border:1px solid rgba(1,49,83,0.06)}
+        ul {
+            list-style: none;
+        }
 
-    /* Sections */
-    section{padding:44px 0}
-    .section-title{text-align:center;margin-bottom:28px}
-    .section-title h2{margin:0;font-size:28px}
-    .grid{display:grid;gap:18px}
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 15px; /* Padding untuk responsif */
+        }
 
-    /* features grid */
-    .features-grid{grid-template-columns:repeat(3,1fr)}
-    .feature{padding:18px;border-radius:12px;background:linear-gradient(180deg,#fff,#f6fbff);border:1px solid rgba(0,0,0,0.03)}
-    .feature h3{margin:8px 0}
-    .feature p{color:var(--muted)}
+        section {
+            padding: 60px 0;
+        }
 
-    /* strategy percentages */
-    .strategy{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-    .strategy .percent{font-weight:800;color:var(--primary);font-size:20px}
+        /* Typography */
+        h1, h2, h3 {
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
 
-    /* pricing */
-    .pricing-grid{grid-template-columns:repeat(3,1fr)}
-    .price{padding:20px;border-radius:12px;background:linear-gradient(180deg,#fff,#f7fbff);box-shadow:var(--shadow);border:1px solid rgba(0,51,102,0.04)}
-    .price.featured{border-color:var(--primary);transform:translateY(-8px)}
+        h2 {
+            font-size: 2.5em;
+            text-align: center;
+            color: var(--dark-color);
+        }
 
-    /* contact */
-    .contact-grid{grid-template-columns:1fr 1fr;gap:18px}
+        .text-center {
+            text-align: center;
+        }
 
-    footer{padding:28px 0;background:var(--dark-700);color:white;margin-top:24px;border-top-left-radius:12px;border-top-right-radius:12px}
+        /* Buttons (CTA) */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            margin: 5px;
+        }
 
-    /* floating chat bubble */
-    .floating-chat{position:fixed;right:18px;bottom:18px;background:linear-gradient(90deg,var(--primary),var(--accent));color:white;padding:12px 16px;border-radius:999px;display:flex;gap:10px;align-items:center;box-shadow:0 12px 36px rgba(2,20,40,0.18);cursor:pointer}
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.4);
+        }
 
-    /* responsive */
-    @media (max-width:980px){
-      .hero-grid{grid-template-columns:1fr}
-      .features-grid{grid-template-columns:repeat(2,1fr)}
-      .pricing-grid{grid-template-columns:1fr}
-      .nav .links{display:none}
-      .hamburger{display:flex}
-      .chat-preview{height:300px}
-    }
-    @media (max-width:540px){
-      h1{font-size:22px}
-      .hero{padding-top:100px}
-    }
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            box-shadow: 0 6px 15px rgba(0, 86, 179, 0.5);
+        }
 
-    /* small helpers */
-    .muted{color:var(--muted)}
-    .label-pill{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(10,108,255,0.06);color:var(--primary);font-weight:700}
-  </style>
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* --- Header & Navigasi --- */
+        #header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: var(--dark-color);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 30px;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        /* --- Hero Section --- */
+        #hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        #hero h1 {
+            font-size: 3.5em;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        #hero p {
+            font-size: 1.25em;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- Fitur Inti Section --- */
+        #fitur {
+            background-color: var(--light-color);
+        }
+
+        .fitur-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .fitur-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 5px solid var(--primary-color);
+        }
+
+        .fitur-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 123, 255, 0.1);
+        }
+
+        .fitur-card i {
+            font-size: 2.5em;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .fitur-card h3 {
+            font-size: 1.4em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        /* --- Manfaat/Keunggulan Section --- */
+        #manfaat {
+            background-color: white;
+        }
+
+        .manfaat-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .manfaat-text {
+            flex: 1;
+        }
+
+        .manfaat-list li {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+            font-weight: 500;
+        }
+
+        .manfaat-list li::before {
+            content: '✓';
+            color: var(--primary-color);
+            font-size: 1.5em;
+            position: absolute;
+            left: 0;
+            top: -5px;
+            font-weight: 800;
+        }
+
+        .manfaat-image {
+            flex: 1;
+            text-align: center;
+            /* Placeholder for a visual element */
+        }
+
+        .manfaat-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- Tabel Harga --- */
+        #harga {
+            background-color: var(--light-color);
+        }
+
+        .harga-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .harga-card {
+            background-color: white;
+            padding: 40px 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .harga-card:hover {
+             transform: translateY(-5px);
+        }
+
+        .highlight-card {
+            border: 2px solid var(--primary-color);
+            background-color: var(--primary-color);
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 123, 255, 0.3);
+        }
+
+        .highlight-card .harga-title, .highlight-card .harga-price {
+            color: white;
+        }
+
+        .highlight-card .btn-secondary {
+            background-color: white;
+            color: var(--primary-color);
+            border-color: white;
+        }
+
+        .highlight-card .btn-secondary:hover {
+            background-color: var(--light-color);
+        }
+
+        .harga-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .harga-price {
+            font-size: 3em;
+            font-weight: 800;
+            margin-bottom: 5px;
+            color: var(--dark-color);
+        }
+
+        .harga-price span {
+            font-size: 0.5em;
+            font-weight: 400;
+        }
+
+        .harga-desc {
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .harga-features li {
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: inherit; /* Inherit color from card */
+        }
+
+        .highlight-card .harga-features li {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 5px;
+        }
+        .harga-features li {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding-bottom: 5px;
+        }
+
+        /* --- Footer --- */
+        #footer {
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            padding: 40px 0 20px 0;
+            font-size: 0.9em;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .footer-section {
+            margin-bottom: 30px;
+            min-width: 250px;
+        }
+
+        .footer-section h4 {
+            font-size: 1.2em;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .footer-section a, .footer-section p {
+            color: #ccc;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            margin-top: 20px;
+        }
+
+        /* --- Responsif (Media Queries) --- */
+
+        /* Tablet dan Mobile (Lebar kurang dari 992px) */
+        @media (max-width: 991px) {
+            .navbar {
+                padding: 0 15px;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+                padding: 20px 0;
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+                text-align: center;
+            }
+
+            .nav-links a {
+                padding: 10px 20px;
+                display: block;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            #hero h1 {
+                font-size: 2.5em;
+            }
+
+            #hero p {
+                font-size: 1.1em;
+            }
+
+            .manfaat-content {
+                flex-direction: column;
+            }
+
+            .fitur-grid, .harga-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-section {
+                text-align: center;
+                min-width: 100%;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-  <header>
-    <div class="container nav">
-      <a class="brand" href="#home">
-        <div class="logo-mark">PE</div>
-        <div class="title">Pak Eko Bot</div>
-      </a>
-      <div class="links">
-        <a href="#features">Fitur</a>
-        <a href="#strategy">Strategi</a>
-        <a href="#pricing">Harga</a>
-        <a href="#contact" class="btn btn-primary">Hubungi</a>
-      </div>
-      <div class="hamburger" id="hamburger" aria-label="menu">
-        <span></span><span></span><span></span>
-      </div>
-    </div>
-  </header>
 
-  <main>
-    <section class="hero" id="home">
-      <div class="container hero-grid">
-        <div>
-          <span class="eyebrow">Chatbot AI • Interaktif • Siap Pakai</span>
-          <h1>Pak Eko Bot — Chatbot AI Elegan untuk Semua Website</h1>
-          <p class="lead">Tingkatkan interaksi pengunjung, jelaskan produk/konten otomatis, dan percepat konversi tanpa perlu tim support besar. Siap integrasi ke WordPress, Shopify, atau HTML sederhana.</p>
-          <div class="hero-ctas">
-            <button class="btn btn-primary" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Mulai Sekarang</button>
-            <a href="#features" class="btn btn-ghost">Lihat Fitur</a>
-          </div>
-          <div style="margin-top:14px;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap">
-            <div class="label-pill">Integrasi mudah</div>
-            <div class="label-pill">Bahasa Indonesia</div>
-            <div class="label-pill">Privacy-first</div>
-          </div>
+    <header id="header">
+        <div class="container navbar">
+            <div class="logo">D' APPARELL</div>
+            <nav>
+                <ul class="nav-links" id="navMenu">
+                    <li><a href="#hero">Beranda</a></li>
+                    <li><a href="#fitur">Fitur</a></li>
+                    <li><a href="#manfaat">Keunggulan</a></li>
+                    <li><a href="#harga">Harga</a></li>
+                    <li><a href="#footer">Kontak</a></li>
+                </ul>
+            </nav>
+            <div class="menu-toggle" id="toggleButton">
+                &#9776; </div>
         </div>
-
-        <aside class="card chat-preview" aria-label="Demo chat Pak Eko Bot">
-          <div class="chat-header">Demo — Pak Eko Bot</div>
-          <div class="chat-body" id="chatBody">
-            <div class="msg bot">Halo! Saya Pak Eko Bot. Mau tahu fitur atau demo singkat?</div>
-            <div class="msg user">Ada paket untuk toko online?</div>
-            <div class="msg bot">Ada. Paket Bisnis mencakup integrasi WhatsApp dan analytics. Ketik 'paket' untuk detail.</div>
-          </div>
-          <div class="chat-foot">
-            <input id="chatInput" class="input" placeholder="Ketik pesan contoh..." />
-            <button class="btn btn-primary" onclick="sendDemo()">Kirim</button>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <section id="features">
-      <div class="container">
-        <div class="section-title"><h2>Fitur Utama</h2><p class="muted">Dirancang untuk memudahkan pemilik website dan meningkatkan kepuasan pengunjung</p></div>
-        <div class="grid features-grid">
-          <div class="feature">
-            <h3>Menjelaskan Produk & Konten</h3>
-            <p>Memberi deskripsi produk otomatis, perbandingan paket, dan rekomendasi yang relevan sesuai intent pengunjung.</p>
-          </div>
-          <div class="feature">
-            <h3>FAQ Dinamis & Auto-Reply</h3>
-            <p>Jawaban cepat untuk pertanyaan umum, mengurangi beban CS dan mempercepat waktu tanggapan.</p>
-          </div>
-          <div class="feature">
-            <h3>Custom Knowledge Base</h3>
-            <p>Upload dokumen atau sitemap produk dan Pak Eko Bot akan menggunakan sumber tersebut untuk menjawab secara spesifik.</p>
-          </div>
-          <div class="feature">
-            <h3>Triggers & CTA Pintar</h3>
-            <p>Memicu diskon, popup, atau penawaran ketika pengunjung menunjukkan minat tinggi atau intent membeli.</p>
-          </div>
-          <div class="feature">
-            <h3>Multiplatform</h3>
-            <p>Siap untuk web, WhatsApp, Telegram, dan integrasi API untuk channel lain.</p>
-          </div>
-          <div class="feature">
-            <h3>Analytics & Reporting</h3>
-            <p>Dashboard untuk melihat pola pertanyaan, tingkat konversi, dan metrik engagement lainnya.</p>
-          </div>
+    </header>
+    ---
+    <section id="hero">
+        <div class="container">
+            <h1>T-Shirt Interaktif, Konversi Maksimal.</h1>
+            <p>Tingkatkan engagement pelanggan dan penjualan T-Shirt Anda hingga 300% dengan T-Shirt Apparell yang <b>Dinamis, Modern, dan Terpercaya</b>.</p>
+            <div class="cta-group">
+                <a href="#harga" class="btn btn-primary">Pilih Paket Sekarang</a>
+                <a href="#manfaat" class="btn btn-secondary">Pelajari Lebih Lanjut</a>
+            </div>
         </div>
-      </div>
     </section>
-
-    <section id="strategy">
-      <div class="container">
-        <div class="section-title"><h2>Strategi Konten Chatbot (Proporsi)</h2><p class="muted">Rasio konten yang direkomendasikan untuk pengalaman pengunjung yang seimbang</p></div>
-        <div class="card strategy">
-          <div style="padding:14px;">
-            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
-              <div class="percent">30%</div><div style="flex:1"><strong>EDUCATIONAL</strong> — Tutorial, tips, how-to, insight industri</div>
+    ---
+    <section id="fitur">
+        <div class="container">
+            <h2 class="text-center">Fitur Inti T-Shirt Apparell</h2>
+            <p class="text-center" style="margin-bottom: 50px;">Setiap T-Shirt dirancang dengan fitur inovatif yang revolusioner.</p>
+            <div class="fitur-grid">
+                <div class="fitur-card">
+                    <i class="fas fa-magic"></i>
+                    <h3>Desain Otomatis</h3>
+                    <p>Sistem kami dapat memberikan rekomendasi desain T-Shirt yang sesuai dengan tren terbaru secara otomatis.</p>
+                </div>
+                <div class="fitur-card">
+                    <i class="fas fa-globe"></i>
+                    <h3>Bahan Universal</h3>
+                    <p>Menggunakan bahan katun premium yang cocok di segala cuaca dan nyaman untuk berbagai aktivitas.</p>
+                </div>
+                <div class="fitur-card">
+                    <i class="fas fa-headset"></i>
+                    <h3>Garansi Kualitas</h3>
+                    <p>Kami menjamin kualitas jahitan dan sablon terbaik, didukung garansi tukar produk 24/7.</p>
+                </div>
+                <div class="fitur-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Dinamika Warna</h3>
+                    <p>Pilihan warna yang selalu diperbarui berdasarkan analitik tren pasar, memastikan Anda selalu tampil modern.</p>
+                </div>
             </div>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
-              <div class="percent">25%</div><div style="flex:1"><strong>INSPIRATIONAL</strong> — Success stories, journey pelanggan</div>
-            </div>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
-              <div class="percent">25%</div><div style="flex:1"><strong>ENTERTAINING</strong> — Meme ringan, quiz, fun facts</div>
-            </div>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
-              <div class="percent">10%</div><div style="flex:1"><strong>PROMOTIONAL</strong> — Launch, diskon, testimoni</div>
-            </div>
-            <div style="display:flex;gap:10px;flex-wrap:wrap">
-              <div class="percent">10%</div><div style="flex:1"><strong>COMMUNITY</strong> — UGC, polling, Q&A</div>
-            </div>
-          </div>
         </div>
-      </div>
     </section>
-
-    <section id="pricing">
-      <div class="container">
-        <div class="section-title"><h2>Paket Harga</h2><p class="muted">Pilih paket yang sesuai — kami juga menyediakan konfigurasi custom untuk enterprise</p></div>
-        <div class="grid pricing-grid">
-          <div class="price">
-            <h3>Starter</h3>
-            <p class="muted">Cocok untuk blog & usaha kecil</p>
-            <div style="margin:14px 0;font-weight:800;font-size:20px;color:var(--primary)">Rp 3.000.000 <span style="font-weight:600;color:var(--muted);font-size:13px">/ setup</span></div>
-            <ul class="muted">
-              <li>Widget web dasar</li>
-              <li>1.000 chat / bulan</li>
-              <li>Basic analytics</li>
-            </ul>
-            <div style="margin-top:12px"><button class="btn btn-ghost" onclick="location.href='#contact'">Pilih Paket</button></div>
-          </div>
-
-          <div class="price featured">
-            <h3>Bisnis</h3>
-            <p class="muted">Best value untuk toko online & UKM</p>
-            <div style="margin:14px 0;font-weight:900;font-size:22px;color:var(--primary)">Rp 8.500.000 <span style="font-weight:600;color:var(--muted);font-size:13px">/ setup</span></div>
-            <ul class="muted">
-              <li>Semua fitur Starter</li>
-              <li>Integrasi WhatsApp</li>
-              <li>5.000 chat / bulan</li>
-              <li>Advanced analytics</li>
-            </ul>
-            <div style="margin-top:12px"><button class="btn btn-primary" onclick="location.href='#contact'">Pilih Paket</button></div>
-          </div>
-
-          <div class="price">
-            <h3>Enterprise</h3>
-            <p class="muted">Skala besar, SLA & dedicated support</p>
-            <div style="margin:14px 0;font-weight:800;font-size:20px;color:var(--primary)">Custom</div>
-            <ul class="muted">
-              <li>Multi-platform</li>
-              <li>Unlimited conversation</li>
-              <li>Dedicated account manager</li>
-            </ul>
-            <div style="margin-top:12px"><button class="btn btn-ghost" onclick="location.href='#contact'">Hubungi Sales</button></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact">
-      <div class="container">
-        <div class="section-title"><h2>Hubungi Kami</h2><p class="muted">Siap bantu integrasi Pak Eko Bot ke website Anda</p></div>
-        <div class="grid contact-grid">
-          <div class="card contact-card">
-            <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px">
-              <div style="width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;color:white;font-weight:800">PE</div>
-              <div>
-                <div style="font-weight:800">Pak Eko Bot — Tim Sales</div>
-                <div class="muted">Siap bantu konsultasi & demo</div>
-              </div>
+    ---
+    <section id="manfaat">
+        <div class="container">
+            <h2 class="text-center">Keunggulan Kami: Mengapa Apparell?</h2>
+            <div class="manfaat-content">
+                <div class="manfaat-text">
+                    <p style="font-size: 1.2em; margin-bottom: 30px;">Tingkatkan pengalaman berpakaian Anda dan percepat penampilan modern dengan T-Shirt Apparell. Kami fokus pada kualitas dan inovasi.</p>
+                    <ul class="manfaat-list">
+                        <li><b>Meningkatkan Pengalaman Pelanggan:</b> Rasa percaya diri maksimal dan kenyamanan sepanjang hari.</li>
+                        <li><b>Mempercepat Konversi Penjualan:</b> Desain <b>eye-catching</b> yang menarik perhatian, memicu keinginan untuk membeli.</li>
+                        <li><b>Struktur Kuat & Profesional:</b> Kualitas bahan premium yang tahan lama, membuat penampilan selalu prima.</li>
+                        <li><b>Dukungan Penuh Tren:</b> Selalu up-to-date dengan tren fashion terkini.</li>
+                    </ul>
+                </div>
+                <div class="manfaat-image">
+                    
+                </div>
             </div>
-            <div style="margin-top:12px">
-              <p><strong>Email</strong><br><a href="mailto:eko@example.com">eko.robiyanto1.com</a></p>
-              <p><strong>WhatsApp</strong><br><a href="https://wa.me/628121122230?text=Halo%20Pak%20Eko%20Bot" target="_blank">+62 821-1147-6069</a></p>
-              <p><strong>Area layanan</strong><br>Indonesia (Jakarta & sekitarnya)</p>
-            </div>
-            <div style="margin-top:16px"><button class="btn btn-primary" onclick="alert('Terima kasih — tim kami akan menghubungi Anda segera.')">Konsultasi Gratis</button></div>
-          </div>
-          <div class="card" style="padding:0;overflow:hidden;border-radius:12px">
-            <iframe src="https://www.google.com/maps?q=-6.2,106.8&z=11&output=embed" style="width:100%;height:100%;min-height:320px;border:0" loading="lazy"></iframe>
-          </div>
         </div>
-      </div>
     </section>
+    ---
+    <section id="harga">
+        <div class="container">
+            <h2 class="text-center">Paket Harga T-Shirt Apparell</h2>
+            <p class="text-center" style="margin-bottom: 50px;">Pilih paket yang paling sesuai dengan kebutuhan gaya harian Anda.</p>
+            <div class="harga-grid">
+                <div class="harga-card">
+                    <h3 class="harga-title">Starter</h3>
+                    <p class="harga-desc">Awal yang sempurna untuk gaya dasar.</p>
+                    <p class="harga-price">Rp 120<span>K/pcs</span></p>
+                    <ul class="harga-features">
+                        <li>Bahan Katun Standar</li>
+                        <li>1 Pilihan Warna Dasar</li>
+                        <li>Garansi Tukar 7 Hari</li>
+                        <li>Tidak Termasuk Custom Desain</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary" style="margin-top: 20px;">Pilih Paket</a>
+                </div>
 
-  </main>
+                <div class="harga-card highlight-card">
+                    <h3 class="harga-title">Bisnis</h3>
+                    <p class="harga-desc">Pilihan terbaik dan paling populer!</p>
+                    <p class="harga-price">Rp 199<span>K/pcs</span></p>
+                    <ul class="harga-features">
+                        <li>Bahan Katun Premium (Combed 30s)</li>
+                        <li>Akses Semua Pilihan Warna</li>
+                        <li>Garansi Kualitas 1 Bulan</li>
+                        <li>Termasuk Custom Desain (Sablon DTG)</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary" style="margin-top: 20px;">Pilih Paket</a>
+                </div>
 
-  <div class="floating-chat" id="floatingChat" aria-label="Buka chat Pak Eko Bot" onclick="openChat()">
-    <div style="font-weight:800">Pak Eko Bot</div>
-    <div style="font-size:20px">💬</div>
-  </div>
+                <div class="harga-card">
+                    <h3 class="harga-title">Enterprise</h3>
+                    <p class="harga-desc">Solusi untuk kebutuhan perusahaan/massal.</p>
+                    <p class="harga-price">Hubungi Kami</p>
+                    <ul class="harga-features">
+                        <li>Bahan Katun Premium Eksklusif</li>
+                        <li>Custom Warna dan Ukuran Penuh</li>
+                        <li>Garansi Kualitas 6 Bulan</li>
+                        <li>Layanan Desain Eksklusif Tim Kami</li>
+                    </ul>
+                    <a href="#footer" class="btn btn-primary" style="margin-top: 20px;">Kontak Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    ---
+    <footer id="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>APPARELL T-Shirt</h4>
+                <p>Menciptakan T-Shirt bukan sekadar pakaian, tetapi gaya hidup. Kualitas premium, desain modern, dan kepercayaan adalah janji kami.</p>
+            </div>
 
-  <footer>
-    <div class="container" style="display:flex;flex-direction:column;align-items:center;gap:8px">
-      <div style="display:flex;align-items:center;gap:10px"><div class="logo-mark" style="background:transparent;border-radius:8px">PE</div><strong>Pak Eko Bot</strong></div>
-      <div class="muted">© 2025 Pak Eko Bot — Semua hak cipta dilindungi</div>
-    </div>
-  </footer>
+            <div class="footer-section">
+                <h4>Navigasi</h4>
+                <a href="#fitur">Fitur Utama</a>
+                <a href="#harga">Tabel Harga</a>
+                <a href="#manfaat">Keunggulan</a>
+            </div>
 
-  <script>
-    // Simple interactive behaviors
-    const hamburger = document.getElementById('hamburger');
-    const linksWrap = document.querySelector('.links');
-    hamburger && hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      if (linksWrap.style.display === 'flex') linksWrap.style.display = 'none'; else linksWrap.style.display = 'flex';
-    });
+            <div class="footer-section">
+                <h4>Kontak Kami</h4>
+                <p>Nama Kontak: <b>Darrell Dewangga</b></p>
+                <p>Email: <a href="mailto:dewangga@gmail.com" style="display: inline-block;">dewangga@gmail.com</a></p>
+                <p>Telepon: <a href="tel:081234567" style="display: inline-block;">081234567</a></p>
+                <p>Layanan: Jakarta & Sekitarnya</p>
+                <p>Lokasi (Koordinat): -6.35418971352047, 106.83314394289417</p>
+                <a href="https://www.google.com/maps/search/?api=1&query=-6.35418971352047,106.83314394289417" target="_blank" style="font-weight: 600;">Lihat di Peta</a>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2025 Apparell T-Shirt. All Rights Reserved.</p>
+        </div>
+    </footer>
 
-    // Demo chat send
-    function sendDemo(){
-      const input = document.getElementById('chatInput');
-      const text = (input.value || '').trim();
-      if(!text) return;
-      const body = document.getElementById('chatBody');
-      const u = document.createElement('div'); u.className='msg user'; u.textContent = text; body.appendChild(u);
-      input.value = '';
-      setTimeout(()=>{
-        const b = document.createElement('div'); b.className='msg bot';
-        const t = text.toLowerCase();
-        if(/paket|harga|pakai/i.test(t)) b.textContent = 'Untuk paket, kami punya Starter, Bisnis, dan Enterprise — lihat di bagian Harga atau ketik "detail paket".';
-        else if(/integrasi|wordpress|shopify|embed/i.test(t)) b.textContent = 'Integrasi mudah: kami sediakan script satu baris atau plugin untuk platform populer.';
-        else if(/demo|coba/i.test(t)) b.textContent = 'Silakan minta demo — kami akan jadwalkan via WhatsApp.';
-        else b.textContent = 'Terima kasih! Ini demo singkat. Dalam versi penuh Pak Eko Bot bisa menjawab dengan data produk Anda.';
-        body.appendChild(b); body.scrollTop = body.scrollHeight;
-      },700);
-    }
+    <script>
+        document.getElementById('toggleButton').addEventListener('click', function() {
+            var navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        });
 
-    // Floating chat -> scroll to contact
-    function openChat(){
-      document.getElementById('contact').scrollIntoView({behavior:'smooth'});
-    }
+        // Menutup menu saat link di-klik pada mode mobile
+        document.querySelectorAll('.nav-links a').forEach(item => {
+            item.addEventListener('click', () => {
+                var navMenu = document.getElementById('navMenu');
+                if (window.innerWidth <= 991 && navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                }
+            });
+        });
+    </script>
 
-    // Observe and animate on scroll
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e=>{ if(e.isIntersecting) e.target.style.transform='translateY(0)'; });
-    }, {threshold:0.15});
-    document.querySelectorAll('.feature, .price, .card').forEach(el=>{ el.style.transform='translateY(10px)'; observer.observe(el); });
-  </script>
 </body>
 </html>
