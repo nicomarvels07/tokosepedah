@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pak Eko Bot — Chatbot AI untuk Semua Website</title>
+  <meta name="description" content="Pak Eko Bot: Chatbot AI elegan (bahasa Indonesia) untuk meningkatkan interaksi dan konversi di website Anda." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #f7f9fc;
+      --dark-900: #021428; /* deep navy */
+      --dark-700: #013153;
+      --primary: #003366; /* elegant dark blue */
+      --primary-600:#005089;
+      --accent: #0a6cff;
+      --muted: #6b7b8c;
+      --card: #ffffff;
+      --glass: rgba(255,255,255,0.04);
+      --radius: 14px;
+      --shadow: 0 10px 30px rgba(2,20,40,0.08);
+      font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#ffffff);color:var(--dark-900);}
+    .container{max-width:1200px;margin:0 auto;padding:24px}
+
+    /* Header */
+    header{position:fixed;left:0;right:0;top:0;background:rgba(255,255,255,0.98);backdrop-filter:saturate(120%) blur(6px);box-shadow:0 6px 20px rgba(2,20,40,0.06);z-index:1000}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+    .logo-mark{width:44px;height:44px;border-radius:9px;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;color:white;font-weight:800}
+    .brand .title{font-weight:800;color:var(--dark-900);letter-spacing:0.2px}
+    .links{display:flex;gap:16px;align-items:center}
+    .links a{color:var(--dark-900);text-decoration:none;font-weight:600}
+    .btn{padding:10px 16px;border-radius:999px;border:0;cursor:pointer;font-weight:700}
+    .btn-primary{background:linear-gradient(90deg,var(--primary),var(--accent));color:white;box-shadow:0 8px 30px rgba(0,80,144,0.12)}
+    .btn-ghost{background:transparent;border:2px solid rgba(1,49,83,0.08);color:var(--primary)}
+
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}
+    .hamburger span{width:24px;height:3px;background:var(--primary);border-radius:3px}
+
+    /* Hero */
+    .hero{padding:120px 0 64px}
+    .hero-grid{display:grid;grid-template-columns:1fr 480px;gap:36px;align-items:center}
+    .eyebrow{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(10,108,255,0.07);color:var(--primary);font-weight:700;margin-bottom:12px}
+    h1{font-size:36px;margin:6px 0 12px;line-height:1.08}
+    p.lead{color:var(--muted);margin:0 0 18px}
+    .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+
+    .card{background:var(--card);border-radius:12px;padding:14px;box-shadow:var(--shadow)}
+    .chat-preview{height:380px;border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+    .chat-header{padding:12px;border-bottom:1px solid rgba(0,0,0,0.04);font-weight:700;background:linear-gradient(90deg,rgba(0,51,102,0.03),transparent)}
+    .chat-body{flex:1;padding:14px;overflow:auto;background:linear-gradient(180deg,#f8fbff,white)}
+    .msg{max-width:78%;padding:10px 12px;border-radius:12px;margin-bottom:10px}
+    .msg.bot{background:linear-gradient(90deg,#eef6ff,#f4faff)}
+    .msg.user{margin-left:auto;background:#eaf2ff}
+    .chat-foot{padding:12px;border-top:1px solid rgba(0,0,0,0.03);display:flex;gap:8px}
+    .input{flex:1;padding:10px 12px;border-radius:10px;border:1px solid rgba(1,49,83,0.06)}
+
+    /* Sections */
+    section{padding:44px 0}
+    .section-title{text-align:center;margin-bottom:28px}
+    .section-title h2{margin:0;font-size:28px}
+    .grid{display:grid;gap:18px}
+
+    /* features grid */
+    .features-grid{grid-template-columns:repeat(3,1fr)}
+    .feature{padding:18px;border-radius:12px;background:linear-gradient(180deg,#fff,#f6fbff);border:1px solid rgba(0,0,0,0.03)}
+    .feature h3{margin:8px 0}
+    .feature p{color:var(--muted)}
+
+    /* strategy percentages */
+    .strategy{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .strategy .percent{font-weight:800;color:var(--primary);font-size:20px}
+
+    /* pricing */
+    .pricing-grid{grid-template-columns:repeat(3,1fr)}
+    .price{padding:20px;border-radius:12px;background:linear-gradient(180deg,#fff,#f7fbff);box-shadow:var(--shadow);border:1px solid rgba(0,51,102,0.04)}
+    .price.featured{border-color:var(--primary);transform:translateY(-8px)}
+
+    /* contact */
+    .contact-grid{grid-template-columns:1fr 1fr;gap:18px}
+
+    footer{padding:28px 0;background:var(--dark-700);color:white;margin-top:24px;border-top-left-radius:12px;border-top-right-radius:12px}
+
+    /* floating chat bubble */
+    .floating-chat{position:fixed;right:18px;bottom:18px;background:linear-gradient(90deg,var(--primary),var(--accent));color:white;padding:12px 16px;border-radius:999px;display:flex;gap:10px;align-items:center;box-shadow:0 12px 36px rgba(2,20,40,0.18);cursor:pointer}
+
+    /* responsive */
+    @media (max-width:980px){
+      .hero-grid{grid-template-columns:1fr}
+      .features-grid{grid-template-columns:repeat(2,1fr)}
+      .pricing-grid{grid-template-columns:1fr}
+      .nav .links{display:none}
+      .hamburger{display:flex}
+      .chat-preview{height:300px}
+    }
+    @media (max-width:540px){
+      h1{font-size:22px}
+      .hero{padding-top:100px}
+    }
+
+    /* small helpers */
+    .muted{color:var(--muted)}
+    .label-pill{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(10,108,255,0.06);color:var(--primary);font-weight:700}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#home">
+        <div class="logo-mark">PE</div>
+        <div class="title">Pak Eko Bot</div>
+      </a>
+      <div class="links">
+        <a href="#features">Fitur</a>
+        <a href="#strategy">Strategi</a>
+        <a href="#pricing">Harga</a>
+        <a href="#contact" class="btn btn-primary">Hubungi</a>
+      </div>
+      <div class="hamburger" id="hamburger" aria-label="menu">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Chatbot AI • Interaktif • Siap Pakai</span>
+          <h1>Pak Eko Bot — Chatbot AI Elegan untuk Semua Website</h1>
+          <p class="lead">Tingkatkan interaksi pengunjung, jelaskan produk/konten otomatis, dan percepat konversi tanpa perlu tim support besar. Siap integrasi ke WordPress, Shopify, atau HTML sederhana.</p>
+          <div class="hero-ctas">
+            <button class="btn btn-primary" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Mulai Sekarang</button>
+            <a href="#features" class="btn btn-ghost">Lihat Fitur</a>
+          </div>
+          <div style="margin-top:14px;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap">
+            <div class="label-pill">Integrasi mudah</div>
+            <div class="label-pill">Bahasa Indonesia</div>
+            <div class="label-pill">Privacy-first</div>
+          </div>
+        </div>
+
+        <aside class="card chat-preview" aria-label="Demo chat Pak Eko Bot">
+          <div class="chat-header">Demo — Pak Eko Bot</div>
+          <div class="chat-body" id="chatBody">
+            <div class="msg bot">Halo! Saya Pak Eko Bot. Mau tahu fitur atau demo singkat?</div>
+            <div class="msg user">Ada paket untuk toko online?</div>
+            <div class="msg bot">Ada. Paket Bisnis mencakup integrasi WhatsApp dan analytics. Ketik 'paket' untuk detail.</div>
+          </div>
+          <div class="chat-foot">
+            <input id="chatInput" class="input" placeholder="Ketik pesan contoh..." />
+            <button class="btn btn-primary" onclick="sendDemo()">Kirim</button>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="container">
+        <div class="section-title"><h2>Fitur Utama</h2><p class="muted">Dirancang untuk memudahkan pemilik website dan meningkatkan kepuasan pengunjung</p></div>
+        <div class="grid features-grid">
+          <div class="feature">
+            <h3>Menjelaskan Produk & Konten</h3>
+            <p>Memberi deskripsi produk otomatis, perbandingan paket, dan rekomendasi yang relevan sesuai intent pengunjung.</p>
+          </div>
+          <div class="feature">
+            <h3>FAQ Dinamis & Auto-Reply</h3>
+            <p>Jawaban cepat untuk pertanyaan umum, mengurangi beban CS dan mempercepat waktu tanggapan.</p>
+          </div>
+          <div class="feature">
+            <h3>Custom Knowledge Base</h3>
+            <p>Upload dokumen atau sitemap produk dan Pak Eko Bot akan menggunakan sumber tersebut untuk menjawab secara spesifik.</p>
+          </div>
+          <div class="feature">
+            <h3>Triggers & CTA Pintar</h3>
+            <p>Memicu diskon, popup, atau penawaran ketika pengunjung menunjukkan minat tinggi atau intent membeli.</p>
+          </div>
+          <div class="feature">
+            <h3>Multiplatform</h3>
+            <p>Siap untuk web, WhatsApp, Telegram, dan integrasi API untuk channel lain.</p>
+          </div>
+          <div class="feature">
+            <h3>Analytics & Reporting</h3>
+            <p>Dashboard untuk melihat pola pertanyaan, tingkat konversi, dan metrik engagement lainnya.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="strategy">
+      <div class="container">
+        <div class="section-title"><h2>Strategi Konten Chatbot (Proporsi)</h2><p class="muted">Rasio konten yang direkomendasikan untuk pengalaman pengunjung yang seimbang</p></div>
+        <div class="card strategy">
+          <div style="padding:14px;">
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
+              <div class="percent">30%</div><div style="flex:1"><strong>EDUCATIONAL</strong> — Tutorial, tips, how-to, insight industri</div>
+            </div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
+              <div class="percent">25%</div><div style="flex:1"><strong>INSPIRATIONAL</strong> — Success stories, journey pelanggan</div>
+            </div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
+              <div class="percent">25%</div><div style="flex:1"><strong>ENTERTAINING</strong> — Meme ringan, quiz, fun facts</div>
+            </div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
+              <div class="percent">10%</div><div style="flex:1"><strong>PROMOTIONAL</strong> — Launch, diskon, testimoni</div>
+            </div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+              <div class="percent">10%</div><div style="flex:1"><strong>COMMUNITY</strong> — UGC, polling, Q&A</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <div class="container">
+        <div class="section-title"><h2>Paket Harga</h2><p class="muted">Pilih paket yang sesuai — kami juga menyediakan konfigurasi custom untuk enterprise</p></div>
+        <div class="grid pricing-grid">
+          <div class="price">
+            <h3>Starter</h3>
+            <p class="muted">Cocok untuk blog & usaha kecil</p>
+            <div style="margin:14px 0;font-weight:800;font-size:20px;color:var(--primary)">Rp 3.000.000 <span style="font-weight:600;color:var(--muted);font-size:13px">/ setup</span></div>
+            <ul class="muted">
+              <li>Widget web dasar</li>
+              <li>1.000 chat / bulan</li>
+              <li>Basic analytics</li>
+            </ul>
+            <div style="margin-top:12px"><button class="btn btn-ghost" onclick="location.href='#contact'">Pilih Paket</button></div>
+          </div>
+
+          <div class="price featured">
+            <h3>Bisnis</h3>
+            <p class="muted">Best value untuk toko online & UKM</p>
+            <div style="margin:14px 0;font-weight:900;font-size:22px;color:var(--primary)">Rp 8.500.000 <span style="font-weight:600;color:var(--muted);font-size:13px">/ setup</span></div>
+            <ul class="muted">
+              <li>Semua fitur Starter</li>
+              <li>Integrasi WhatsApp</li>
+              <li>5.000 chat / bulan</li>
+              <li>Advanced analytics</li>
+            </ul>
+            <div style="margin-top:12px"><button class="btn btn-primary" onclick="location.href='#contact'">Pilih Paket</button></div>
+          </div>
+
+          <div class="price">
+            <h3>Enterprise</h3>
+            <p class="muted">Skala besar, SLA & dedicated support</p>
+            <div style="margin:14px 0;font-weight:800;font-size:20px;color:var(--primary)">Custom</div>
+            <ul class="muted">
+              <li>Multi-platform</li>
+              <li>Unlimited conversation</li>
+              <li>Dedicated account manager</li>
+            </ul>
+            <div style="margin-top:12px"><button class="btn btn-ghost" onclick="location.href='#contact'">Hubungi Sales</button></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-title"><h2>Hubungi Kami</h2><p class="muted">Siap bantu integrasi Pak Eko Bot ke website Anda</p></div>
+        <div class="grid contact-grid">
+          <div class="card contact-card">
+            <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px">
+              <div style="width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;color:white;font-weight:800">PE</div>
+              <div>
+                <div style="font-weight:800">Pak Eko Bot — Tim Sales</div>
+                <div class="muted">Siap bantu konsultasi & demo</div>
+              </div>
+            </div>
+            <div style="margin-top:12px">
+              <p><strong>Email</strong><br><a href="mailto:eko@example.com">eko.robiyanto1.com</a></p>
+              <p><strong>WhatsApp</strong><br><a href="https://wa.me/628121122230?text=Halo%20Pak%20Eko%20Bot" target="_blank">+62 821-1147-6069</a></p>
+              <p><strong>Area layanan</strong><br>Indonesia (Jakarta & sekitarnya)</p>
+            </div>
+            <div style="margin-top:16px"><button class="btn btn-primary" onclick="alert('Terima kasih — tim kami akan menghubungi Anda segera.')">Konsultasi Gratis</button></div>
+          </div>
+          <div class="card" style="padding:0;overflow:hidden;border-radius:12px">
+            <iframe src="https://www.google.com/maps?q=-6.2,106.8&z=11&output=embed" style="width:100%;height:100%;min-height:320px;border:0" loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="floating-chat" id="floatingChat" aria-label="Buka chat Pak Eko Bot" onclick="openChat()">
+    <div style="font-weight:800">Pak Eko Bot</div>
+    <div style="font-size:20px">💬</div>
+  </div>
+
+  <footer>
+    <div class="container" style="display:flex;flex-direction:column;align-items:center;gap:8px">
+      <div style="display:flex;align-items:center;gap:10px"><div class="logo-mark" style="background:transparent;border-radius:8px">PE</div><strong>Pak Eko Bot</strong></div>
+      <div class="muted">© 2025 Pak Eko Bot — Semua hak cipta dilindungi</div>
+    </div>
+  </footer>
+
+  <script>
+    // Simple interactive behaviors
+    const hamburger = document.getElementById('hamburger');
+    const linksWrap = document.querySelector('.links');
+    hamburger && hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      if (linksWrap.style.display === 'flex') linksWrap.style.display = 'none'; else linksWrap.style.display = 'flex';
+    });
+
+    // Demo chat send
+    function sendDemo(){
+      const input = document.getElementById('chatInput');
+      const text = (input.value || '').trim();
+      if(!text) return;
+      const body = document.getElementById('chatBody');
+      const u = document.createElement('div'); u.className='msg user'; u.textContent = text; body.appendChild(u);
+      input.value = '';
+      setTimeout(()=>{
+        const b = document.createElement('div'); b.className='msg bot';
+        const t = text.toLowerCase();
+        if(/paket|harga|pakai/i.test(t)) b.textContent = 'Untuk paket, kami punya Starter, Bisnis, dan Enterprise — lihat di bagian Harga atau ketik "detail paket".';
+        else if(/integrasi|wordpress|shopify|embed/i.test(t)) b.textContent = 'Integrasi mudah: kami sediakan script satu baris atau plugin untuk platform populer.';
+        else if(/demo|coba/i.test(t)) b.textContent = 'Silakan minta demo — kami akan jadwalkan via WhatsApp.';
+        else b.textContent = 'Terima kasih! Ini demo singkat. Dalam versi penuh Pak Eko Bot bisa menjawab dengan data produk Anda.';
+        body.appendChild(b); body.scrollTop = body.scrollHeight;
+      },700);
+    }
+
+    // Floating chat -> scroll to contact
+    function openChat(){
+      document.getElementById('contact').scrollIntoView({behavior:'smooth'});
+    }
+
+    // Observe and animate on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e=>{ if(e.isIntersecting) e.target.style.transform='translateY(0)'; });
+    }, {threshold:0.15});
+    document.querySelectorAll('.feature, .price, .card').forEach(el=>{ el.style.transform='translateY(10px)'; observer.observe(el); });
+  </script>
+</body>
+</html>
